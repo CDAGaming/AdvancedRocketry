@@ -15,6 +15,7 @@ screenshots
 /blueprints
 *.xcf
 *.iml
+/run
 /libs
 /models
 /crash-reports
