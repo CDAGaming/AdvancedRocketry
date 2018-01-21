@@ -1,3 +1,5 @@
+import se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask
+
 buildscript {
     repositories {
         mavenCentral()
@@ -15,11 +17,10 @@ buildscript {
     }
 }
 
-
 plugins {
-  id "com.gradle.build-scan" version "1.9"
+  id "com.gradle.build-scan" version "1.11"
   id "com.matthewprenger.cursegradle" version "1.0.9"
-  id "se.bjurr.gitchangelog.git-changelog-gradle-plugin" version "1.50"
+  id "se.bjurr.gitchangelog.git-changelog-gradle-plugin" version "1.55"
 }
 apply plugin: 'java'
 apply plugin: 'net.minecraftforge.gradle.forge'
@@ -38,9 +39,9 @@ jar {
 
 apply from: "gradle/scripts/getbuildnumber.gradle"
 minecraft {
-    version = "1.12.2-14.23.0.2501"
+    version = "1.12.2-14.23.1.2600"
     runDir = "run"
-    mappings = "snapshot_20170624"
+    mappings = "snapshot_20180120"
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
     replaceIn "src/main/java/zmaster587/advancedRocketry/AdvancedRocketry.java"
@@ -52,21 +53,19 @@ minecraft {
     replace "%LIBVULPESVERSION%", project.libVulpesVersion
 }
 
-
 apply from: "gradle/scripts/version.gradle"
 
 repositories {
-        maven {
-            name = "mezz.jei"
-            url = "http://dvs1.progwml6.com/files/maven"
-        }
+    maven {
+        name = "mezz.jei"
+        url = "http://dvs1.progwml6.com/files/maven"
+    }
+    maven {
+        url = "http://maven.mcmoddev.com"
+    }
     ivy {
             name "industrialcraft-2"
-            artifactPattern "http://jenkins.ic2.player.to/job/IC2_111/39/artifact/build/libs/[module]-[revision].[ext]"
-        }
-    ivy {
-            name "Tesla"
-            artifactPattern "https://addons-origin.cursecdn.com/files/2347/256/[module]-[revision].[ext]"
+            artifactPattern "http://jenkins.ic2.player.to/job/IC2_112/42/artifact/build/libs/[module]-[revision].[ext]"
         }
 //    ivy {
 //            name "EnderIO"
@@ -74,20 +73,20 @@ repositories {
 //        }
     ivy {
             name "LibVulpes"
-            artifactPattern "http://65.78.115.159:8080/job/LibVulpes/job/libVulpes/job/1.12/" + project.libVulpesBuildNum +"/artifact/output/[module]-[revision].[ext]"
+            artifactPattern "http://65.78.115.159:8080/job/LibVulpes/job/libVulpes/job/1.12/" + project.libVulpesBuildNum + "/artifact/output/[module]-[revision].[ext]"
         }
 }
 
 dependencies {
-    compile name: 'industrialcraft-2', version: '2.7.39-ex111-api', ext: 'jar'
-    compile name: 'Tesla', version: '1.11-1.3.0.51-deobf', ext: 'jar'
+    compile name: 'industrialcraft-2', version: '2.8.42-ex112-api', ext: 'jar'
+    compile "net.darkhax.tesla:Tesla-1.12.2:1.0.63:deobf"
     //compile name: 'EnderIO', version: '1.7.10-2.2.8.381', ext: 'jar'
     compile name: 'LibVulpes', version: '1.12.2-' + project.libVulpesVersion  + '-' + project.libVulpesBuildNum + '-deobf', ext: 'jar'
     
     // compile against the JEI API
-    deobfCompile "mezz.jei:jei_1.12.2:4.8.0.110:api"
+    deobfCompile "mezz.jei:jei_1.12.2:4.8.5.146:api"
     // at runtime, use the full JEI jar
-    runtime "mezz.jei:jei_1.12.2:4.8.0.110"
+    runtime "mezz.jei:jei_1.12.2:4.8.5.146"
 
     // for more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
@@ -154,12 +153,12 @@ curseforge{
    }
 }
 
-task makeChangelog(type: se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask) {
+task makeChangelog(type: GitChangelogTask) {
     file = new File ("changelog.html")
     untaggedName = "Current release ${project.version}"
     fromCommit = startGitRev
     toRef =  "HEAD"
-    gitHubIssuePattern = "nonada123";
+    gitHubIssuePattern = "nonada123"
     templateContent = """
 {{#tags}}
 <h1> Highly untested and may break world</h1>

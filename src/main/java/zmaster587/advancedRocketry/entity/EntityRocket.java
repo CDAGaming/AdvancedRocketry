@@ -366,7 +366,7 @@ public class EntityRocket extends EntityRocketBase implements INetworkEntity, IM
 
 	/**
 	 * Sets the the status of flight of the rocket and updates the datawatcher
-	 * @param inflight status of flight
+	 * @param inOrbit status of flight
 	 */
 	public void setInOrbit(boolean inOrbit) {
 		this.isInOrbit = inOrbit;
@@ -1655,7 +1655,7 @@ public class EntityRocket extends EntityRocketBase implements INetworkEntity, IM
 
 	@Override
 	public boolean canInteractWithContainer(EntityPlayer entity) {
-		boolean ret = !this.isDead && this.getDistanceToEntity(entity) < 64;
+		boolean ret = !this.isDead && this.getDistance(entity) < 64;
 		if(!ret)
 			RocketInventoryHelper.removePlayerFromInventoryBypass(entity);
 

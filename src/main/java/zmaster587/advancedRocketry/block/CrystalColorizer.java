@@ -10,7 +10,7 @@ import net.minecraft.world.IBlockAccess;
 public class CrystalColorizer implements IBlockColor, IItemColor {
 
 	@Override
-	public int getColorFromItemstack(ItemStack stack, int tintIndex) {
+	public int colorMultiplier(ItemStack stack, int tintIndex) {
 		return BlockCrystal.EnumCrystal.values()[stack.getItemDamage()].getColor();
 		
 	}
