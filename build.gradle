@@ -56,6 +56,9 @@ minecraft {
 apply from: "gradle/scripts/version.gradle"
 
 repositories {
+    flatDir {
+        dirs 'libs'
+    }
     maven {
         name = "mezz.jei"
         url = "http://dvs1.progwml6.com/files/maven"
@@ -81,7 +84,7 @@ dependencies {
     compile name: 'industrialcraft-2', version: '2.8.42-ex112-api', ext: 'jar'
     compile "net.darkhax.tesla:Tesla-1.12.2:1.0.63:deobf"
     //compile name: 'EnderIO', version: '1.7.10-2.2.8.381', ext: 'jar'
-    compile name: 'LibVulpes', version: '1.12.2-' + project.libVulpesVersion  + '-' + project.libVulpesBuildNum + '-deobf', ext: 'jar'
+    compile files('libs/LibVulpes-1.12.2-0.2.7-deobf.jar')
     
     // compile against the JEI API
     deobfCompile "mezz.jei:jei_1.12.2:4.8.5.146:api"
