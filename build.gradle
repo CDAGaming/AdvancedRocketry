@@ -39,9 +39,9 @@ jar {
 
 apply from: "gradle/scripts/getbuildnumber.gradle"
 minecraft {
-    version = "1.12.2-14.23.1.2600"
+    version = "1.12.2-14.23.1.2602"
     runDir = "run"
-    mappings = "snapshot_20180120"
+    mappings = "snapshot_20180122"
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
     replaceIn "src/main/java/zmaster587/advancedRocketry/AdvancedRocketry.java"
@@ -87,9 +87,9 @@ dependencies {
     compile files('libs/LibVulpes-1.12.2-0.2.7-deobf.jar')
     
     // compile against the JEI API
-    deobfCompile "mezz.jei:jei_1.12.2:4.8.5.146:api"
+    deobfCompile "mezz.jei:jei_1.12.2:4.8.5.147:api"
     // at runtime, use the full JEI jar
-    runtime "mezz.jei:jei_1.12.2:4.8.5.146"
+    runtime "mezz.jei:jei_1.12.2:4.8.5.147"
 
     // for more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
@@ -158,7 +158,7 @@ curseforge{
 
 task makeChangelog(type: GitChangelogTask) {
     file = new File ("changelog.html")
-    untaggedName = "Current release ${project.version}"
+    untaggedName = "Current Release ${project.version}"
     fromCommit = startGitRev
     toRef =  "HEAD"
     gitHubIssuePattern = "nonada123"
